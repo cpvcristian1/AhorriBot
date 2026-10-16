@@ -61,7 +61,7 @@ def fake_chollometro(monkeypatch):
     "raw,expected",
     [
         ("8,90", 8.9),
-        ("154.33", 15433.0),  # dots are treated as thousands separators
+        ("154.33", 15433.0),  # es-ES format: dot = thousands sep, so this is 15433.0 by design
         ("1.234,56", 1234.56),
         ("5,00", 5.0),
         ("no price", 0.0),

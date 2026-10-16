@@ -23,7 +23,17 @@ def is_tech_product(title: str) -> bool:
     return False
 
 def parse_price_str(price_str: str) -> float:
-    """Convierte '18,32' o '154.33' a float."""
+    """Convierte un precio en texto a float.
+
+    Formato aceptado: espanol (es-ES), que es el que devuelven las fuentes del
+    bot (Amazon Espana, Chollometro, CamelCamelCamel). La coma ',' es el
+    separador decimal y el punto '.' es el separador de millares.
+
+    Los puntos se eliminan antes de convertir, asi que "154.33" se interpreta
+    como 15433.0. Es una decision a proposito, no un error: un punto en estas
+    fuentes siempre separa millares. No hay soporte para punto decimal
+    anglosajon ("154.33" no significa nunca 154 con 33 centimos).
+    """
     clean = price_str.replace("€", "").replace(" ", "").replace(".", "").replace(",", ".")
     try:
         return float(clean)
@@ -128,7 +138,9 @@ def fetch_chollometro_deals() -> List[Dict[str, Any]]:
                 
             asin = asin_match.group(1)
             
-            # Buscar precio en formato 18,13€ o 9.50€
+            # Buscar precio: la regex acepta coma o punto como separador, pero
+            # el formato de las fuentes es es-ES ("18,13" = 18.13 euros; un
+            # punto, si aparece, son millares y parse_price_str lo trata asi).
             price_match = re.search(r'(\d+[,\.]\d{2})€', desc)
             price = parse_price_str(price_match.group(1)) if price_match else 0.0
             
