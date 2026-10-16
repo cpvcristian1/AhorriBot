@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+deals.db
+.venv/
+venv/
+*.db
+*.db-journal
+*.sqlite
+.pytest_cache/
+.idea/
+.vscode/
