@@ -1,5 +1,8 @@
 # AhorriBot
 
+[![Tests](https://github.com/cpvcristian1/AhorriBot/actions/workflows/tests.yml/badge.svg)](https://github.com/cpvcristian1/AhorriBot/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A Telegram bot that watches Amazon Spain price drops and sends instant alerts to your phone.
 
 ## Description
